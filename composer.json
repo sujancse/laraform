@@ -1,0 +1,26 @@
+{
+    "name": "st8113/yaml",
+    "description": "Yaml/JSON to crud in laravel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sujan Mahmud",
+            "email": "sujancseruet@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/yaml": ">=4.0.3",
+        "laravelcollective/html": "^5.4.0"
+    },
+    "minimum-stability": "dev",
+
+    "autoload" : {
+        "psr-4" : {
+            "st8113\\Yaml\\" : "src/"
+        },
+        "files" : [
+            "src/helpers.php"
+        ]
+    }
+}
