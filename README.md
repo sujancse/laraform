@@ -3,7 +3,7 @@ Developing rapid forms from yaml and json, when large number of input fields wil
 
 ## Installation
 ```
-composer require "st8113/yaml
+composer require "st8113/yaml"
 ```
 
 As `st8113/yaml` package is based on `laravelcollective/html` you have to add your new provider to the providers array of config/app.php:
