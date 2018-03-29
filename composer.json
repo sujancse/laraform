@@ -1,6 +1,6 @@
 {
     "name": "st8113/yaml",
-    "description": "Yaml/JSON to crud in laravel",
+    "description": "HTML and Form Builders for the Laravel Framework from YAML and JSON",
     "type": "library",
     "license": "MIT",
     "authors": [
