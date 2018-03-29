@@ -1,8 +1,10 @@
 # YAML, JSON to form with validation for laravel
-Developing rapid forms from yaml and json, when large number of input fields will be needed as well as frequent addition and deduction of fields.
+Developing rapid forms from yaml and json, when large number of input fields will be required as well as frequent addition and deduction of fields.
 
 ## Installation
-`composer require "st8113/yaml`
+```
+composer require "st8113/yaml
+```
 
 As `st8113/yaml` package is based on `laravelcollective/html` you have to add your new provider to the providers array of config/app.php:
 
