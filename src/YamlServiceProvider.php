@@ -1,6 +1,6 @@
 <?php
 
-namespace st8113\Yaml;
+namespace Sujan\Yaml;
 
 use Illuminate\Support\ServiceProvider;
 use Form;

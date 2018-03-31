@@ -1,12 +1,9 @@
-<?php namespace st8113\Yaml;
+<?php namespace Sujan\Yaml;
 
 use Symfony\Component\Yaml\Parser;
 
 /**
- * Yaml helper class
- *
- * @package october\parse
- * @author Alexey Bobkov, Samuel Georges
+ * Yaml Parser helper class
  */
 class YamlParser
 {

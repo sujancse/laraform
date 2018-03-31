@@ -1,4 +1,4 @@
-<?php namespace st8113\Yaml;
+<?php namespace Sujan\Yaml;
 
 use Collective\Html\FormBuilder;
 use Illuminate\Support\HtmlString;
@@ -15,7 +15,7 @@ class YamlFormBuilder
      * Create a new form builder instance.
      *
      * @param FormBuilder $formBuilder
-     * @param \st8113\Yaml\YamlParser $yamlParser
+     * @param \Sujan\Yaml\YamlParser $yamlParser
      */
     public function __construct(FormBuilder $formBuilder, YamlParser $yamlParser)
     {

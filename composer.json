@@ -1,5 +1,5 @@
 {
-    "name": "st8113/yaml",
+    "name": "sujan/laravel-form-builder",
     "description": "HTML and Form Builders for the Laravel Framework from YAML and JSON",
     "type": "library",
     "license": "MIT",
@@ -17,7 +17,7 @@
 
     "autoload" : {
         "psr-4" : {
-            "st8113\\Yaml\\" : "src/"
+            "Sujan\\Yaml\\" : "src/"
         },
         "files" : [
             "src/helpers.php"

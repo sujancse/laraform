@@ -35,10 +35,3 @@ if(!function_exists('get_class')){
         return isset($field->class) ? $field->class : '';
     }
 }
-
-if(!function_exists('get_partial')){
-    function get_partial($file){
-        return base_path('/resources/views/yaml/').$file;
-    }
-}
-

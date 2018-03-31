@@ -2,14 +2,16 @@
 Developing rapid forms from yaml and json, when large number of input fields will be needed as well as frequent addition and deduction of fields.
 
 ## Installation
-`composer require "st8113/yaml`
+```
+composer require "sujan/laravel-form-builder
+```
 
-As `st8113/yaml` package is based on `laravelcollective/html` you have to add your new provider to the providers array of config/app.php:
+As `Sujan/yaml` package is based on `laravelcollective/html` you have to add your new provider to the providers array of config/app.php:
 
 ```
 'providers' => [
     // ...
-    st8113\Yaml\YamlServiceProvider::class,
+    Sujan\Yaml\YamlServiceProvider::class,
     Collective\Html\HtmlServiceProvider::class,
     // ...
 ],
@@ -39,7 +41,7 @@ Then add `yaml.css` to your master template like
 
 ## Usage
 This package has multi purpose usage. You will get all the facilities of `Laravel Collective` 
-as well as facilities of `st8113/yaml` package. We developed this package based on real life scenario.
+as well as facilities of `Sujan/yaml` package. We developed this package based on real life scenario.
 
 #### Scenario 1
 Our company decided to develop a key value store where all of our settings will reside. 
