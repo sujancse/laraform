@@ -1,12 +1,12 @@
 # YAML, JSON to form with validation for laravel
-Developing rapid forms from yaml and json, when large number of input fields will be needed as well as frequent addition and deduction of fields.
+Developing rapid forms from yaml and json, when large number of input fields will be required as well as frequent addition and deduction of fields.
 
 ## Installation
 ```
-composer require "sujan/laravel-form-builder
+composer require "sujan/laravel-form-builder"
 ```
 
-As `Sujan/yaml` package is based on `laravelcollective/html` you have to add your new provider to the providers array of config/app.php:
+As `sujan/laravel-form-builder` package is based on `laravelcollective/html` you have to add your new provider to the providers array of config/app.php:
 
 ```
 'providers' => [
@@ -41,7 +41,7 @@ Then add `yaml.css` to your master template like
 
 ## Usage
 This package has multi purpose usage. You will get all the facilities of `Laravel Collective` 
-as well as facilities of `Sujan/yaml` package. We developed this package based on real life scenario.
+as well as facilities of `sujan/laravel-form-builder` package. We developed this package based on real life scenario.
 
 #### Scenario 1
 Our company decided to develop a key value store where all of our settings will reside. 
