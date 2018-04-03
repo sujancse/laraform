@@ -115,6 +115,8 @@ fields:
 }
 ```
 
+![Sample form](https://imgur.com/a/PCUfz)
+
 ### Example 2
 Our package is mainly developed for making form from json objects. 
 

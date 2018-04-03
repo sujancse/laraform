@@ -1,6 +1,6 @@
 .span-left {
     float: left;
-    width: 48.5%;
+    width: 49.5%;
     clear: left;
 }
 
@@ -11,9 +11,17 @@
 
 .span-right {
     float: right;
-    width: 48.5%;
+    width: 49.5%;
     clear: right;
 }
+
+@media (max-width: 768px) {
+    .span-right, .span-left {
+        width: 100%;
+        clear: both;
+    }
+}
+
 .span-left,
 .span-right,
 .span-full{
@@ -47,23 +55,6 @@
 
 input[type=checkbox] {
     margin-right: 10px;
-}
-
-.span-left {
-    float: left;
-    width: 48.5%;
-    clear: left;
-}
-
-.span-full {
-    width: 100%;
-    clear: both;
-}
-
-.span-right {
-    float: right;
-    width: 48.5%;
-    clear: right;
 }
 
 .field-section {
