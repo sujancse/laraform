@@ -14,7 +14,7 @@ class YamlServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([__DIR__.'/yaml.css' => public_path('assets/css/yaml.css')], 'public');
+        $this->publishes([__DIR__.'/yaml.css' => public_path('css/yaml.css')], 'public');
         $this->app->call([$this, 'registerFormBuilderMacros']);
     }
     /**
