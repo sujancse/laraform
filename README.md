@@ -11,7 +11,7 @@ As `sujan/laravel-form-builder` package is based on `laravelcollective/html` you
 ```
 'providers' => [
     // ...
-    Sujan\Yaml\YamlServiceProvider::class,
+    Sujan\LaraForm\YamlServiceProvider::class,
     Collective\Html\HtmlServiceProvider::class,
     // ...
 ],

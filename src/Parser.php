@@ -1,11 +1,11 @@
-<?php namespace Sujan\Yaml;
+<?php namespace Sujan\LaraForm;
 
-use Symfony\Component\Yaml\Parser;
+use Symfony\Component\Yaml\Parser as SymfonyParser;
 
 /**
  * Yaml Parser helper class
  */
-class YamlParser
+class Parser
 {
     /**
      * Parses supplied YAML contents in to a PHP array.
@@ -14,7 +14,7 @@ class YamlParser
      */
     public function parse($contents)
     {
-        $yaml = new Parser;
+        $yaml = new SymfonyParser();
         return $yaml->parse($contents);
     }
 

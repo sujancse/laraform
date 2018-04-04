@@ -1,4 +1,4 @@
-<?php namespace Sujan\Yaml;
+<?php namespace Sujan\LaraForm;
 
 use Collective\Html\FormBuilder;
 use Illuminate\Support\HtmlString;
@@ -6,7 +6,7 @@ use Illuminate\Support\HtmlString;
 /**
  * Service provider for generating Html macros
  */
-class YamlFormBuilder
+class LaraForm
 {
 	protected $formBuilder;
     protected $yamlParser;
@@ -15,9 +15,9 @@ class YamlFormBuilder
      * Create a new form builder instance.
      *
      * @param FormBuilder $formBuilder
-     * @param \Sujan\Yaml\YamlParser $yamlParser
+     * @param \Sujan\LaraForm\Parser $yamlParser
      */
-    public function __construct(FormBuilder $formBuilder, YamlParser $yamlParser)
+    public function __construct(FormBuilder $formBuilder, Parser $yamlParser)
     {
         $this->formBuilder = $formBuilder;
         $this->yamlParser = $yamlParser;
