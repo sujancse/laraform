@@ -115,7 +115,11 @@ fields:
 }
 ```
 
-![Sample form](https://imgur.com/a/PCUfz)
+### Html form of sample YAML and JSON.
+![Sample form](https://i.imgur.com/tumLaRJ.png)
+
+### Html form of sample YAML and JSON with validation message.
+![Sample form with validation](https://i.imgur.com/hELsU5d.png)
 
 ### Example 2
 Our package is mainly developed for making form from json objects. 
