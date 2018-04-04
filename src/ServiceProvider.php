@@ -2,9 +2,9 @@
 
 namespace Sujan\LaraForm;
 
+use Collective\Html\HtmlBuilder;
 use Illuminate\Container\Container;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
-use Form;
 use Collective\Html\FormBuilder;
 
 class ServiceProvider extends LaravelServiceProvider
@@ -26,30 +26,32 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('laraform', function(Container $app){
-            return new LaraForm($app[FormBuilder::class], $app[Parser::class]);
+        $formBuilder = new FormBuilder(app(HtmlBuilder::class), app('url'), app('view'), app('session.store')->token(), app('request'));
+
+        $this->app->bind('laraform', function(Container $app) use ($formBuilder){
+            return new LaraForm($formBuilder, $app[Parser::class]);
         });
 
         $this->app->alias('laraform', LaraForm::class);
 
-        $this->registerFormBuilderMacros();
+        $this->registerFormBuilderMacros(app('laraform'), $formBuilder);
     }
 
     /**
     * Creating to form builder macros yamlToForm and jsonToForm
     *
-    * @param $yamlFormBuilder
+    * @param LaraForm $laraForm
+     * @param FormBuilder $formBuilder
     */
-    public function registerFormBuilderMacros()
+    public function registerFormBuilderMacros(LaraForm $laraForm, FormBuilder $formBuilder)
     {
-        $laraForm = app('laraform');
 
-        Form::macro('yaml', function($filePath) use($laraForm)
+        $formBuilder->macro('yaml', function($filePath) use($laraForm)
         {
             return $laraForm->yamlToForm($filePath);
         });
 
-        Form::macro('json', function($filePath) use($laraForm)
+        $formBuilder->macro('json', function($filePath) use($laraForm)
         {
             return $laraForm->jsonToForm($filePath);
         });
