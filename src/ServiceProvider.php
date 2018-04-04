@@ -2,10 +2,8 @@
 
 namespace Sujan\LaraForm;
 
-use Collective\Html\HtmlBuilder;
-use Illuminate\Container\Container;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
-use Collective\Html\FormBuilder;
+use Form;
 
 class ServiceProvider extends LaravelServiceProvider
 {
@@ -16,51 +14,25 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function boot()
     {
-        $this->publishes([__DIR__ . '/laraform.css' => public_path('css/laraform.css')], 'laraform');
-
+        $this->publishes([__DIR__.'/laraform.css' => public_path('css/laraform.css')], 'laraform');
+        $this->app->call([$this, 'registerFormBuilderMacros']);
     }
+
     /**
-     * Register any application services.
+     * Creating to form builder macros yamlToForm and jsonToForm
      *
-     * @return void
+     * @param LaraForm $laraForm
      */
-    public function register()
+    public function registerFormBuilderMacros(LaraForm $laraForm)
     {
-        $formBuilder = new FormBuilder(app(HtmlBuilder::class), app('url'), app('view'), app('session.store')->token(), app('request'));
-
-        $this->app->singleton('laraform', function(Container $app) use ($formBuilder){
-            return new LaraForm($formBuilder, $app[Parser::class]);
-        });
-
-        $this->app->alias('laraform', LaraForm::class);
-
-        $this->registerFormBuilderMacros(app('laraform'), $formBuilder);
-    }
-
-    /**
-    * Creating to form builder macros yamlToForm and jsonToForm
-    *
-    * @param LaraForm $laraForm
-     * @param FormBuilder $formBuilder
-    */
-    public function registerFormBuilderMacros(LaraForm $laraForm, FormBuilder $formBuilder)
-    {
-
-        $formBuilder->macro('yaml', function($filePath) use($laraForm)
+        Form::macro('yaml', function($filePath) use($laraForm)
         {
             return $laraForm->yamlToForm($filePath);
         });
 
-        $formBuilder->macro('json', function($filePath) use($laraForm)
+        Form::macro('json', function($filePath) use($laraForm)
         {
             return $laraForm->jsonToForm($filePath);
         });
-    }
-
-    public function provides()
-    {
-        return [
-            'laraform'
-        ];
     }
 }

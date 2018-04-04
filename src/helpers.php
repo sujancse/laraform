@@ -24,14 +24,4 @@ if(!function_exists('get_span')){
     }
 }
 
-if(!function_exists('get_id')){
-    function get_id($field){
-        return isset($field->id) ? $field->id : '';
-    }
-}
 
-if(!function_exists('get_class')){
-    function get_class($field){
-        return isset($field->class) ? $field->class : '';
-    }
-}

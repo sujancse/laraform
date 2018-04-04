@@ -36,7 +36,7 @@ class LaraForm
     {
         $builder .= $this->getOpeningTag($name, $field);
         $builder .= $this->formBuilder->label(isset($field->label) ? $field->label : '');
-        $builder .= $this->formBuilder->input('text', $name, null, $options = ['class' => 'form-control '.get_class($field)]);
+        $builder .= $this->formBuilder->input('text', $name, null, ['class' => 'form-control']);
 
         $builder .= $this->getClosingTag($name);
 
@@ -56,7 +56,7 @@ class LaraForm
     {
         $builder .= $this->getOpeningTag($name, $field);
         $builder .= $this->formBuilder->label(isset($field->label) ? $field->label : '');
-        $builder .= $this->formBuilder->input($field->type, $name, null, $options = ['class' => 'form-control '.get_class($field), 'placeholder' => isset($field->placeholder) ? $field->placeholder : '', "id" => get_id($field)]);
+        $builder .= $this->formBuilder->input($field->type, $name, null, ['class' => 'form-control']);
         $builder .= $this->getClosingTag($name);
 
         return $builder;
@@ -75,7 +75,7 @@ class LaraForm
     {
         $builder .= $this->getOpeningTag($name, $field);
         $builder .= $this->formBuilder->label(isset($field->label) ? $field->label : '');
-        $builder .= $this->formBuilder->textarea($name, $value = null, $options = ['class' => 'form-control '.get_class($field), 'cols' => 50, 'rows' => 5, "id" => get_id($field)]);
+        $builder .= $this->formBuilder->textarea($name, $value = null, $options = ['class' => 'form-control', 'cols' => 50, 'rows' => 5]);
         $builder .= $this->getClosingTag($name); 
 
         return $builder;   	
