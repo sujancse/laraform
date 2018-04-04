@@ -1,12 +1,12 @@
 # YAML, JSON to html form with validation for laravel
-Developing rapid forms from yaml and json, when large number of input fields will be required as well as frequent addition and deduction of fields.
+Developing rapid forms from yaml and json, when large number of input fields will be required as well as frequent addition and deduction of form fields.
 
 ## Installation
 ```
-composer require "sujan/laravel-form-builder"
+composer require "sujan/laraform"
 ```
 
-As `sujan/laravel-form-builder` package is based on `laravelcollective/html` you have to add your new provider to the providers array of config/app.php:
+As `sujan/laraform` package is based on `laravelcollective/html` you have to add your new provider to the providers array of config/app.php:
 
 ```
 'providers' => [
@@ -32,16 +32,16 @@ Then run the command
 ```
 php artisan vendor:publish
 ```
-It will give you a `yaml.css` file in `/assets/css/yaml.css`
+It will give you a `laraform.css` file in `/css/laraform.css`
 
-Then add `yaml.css` to your master template like 
+Then add `laraform.css` to your master template like 
 ```
-<link rel="stylesheet" href="{{ asset('assets/css/yaml.css') }}">
+<link rel="stylesheet" href="{{ asset('css/laraform.css') }}">
 ```
 
 ## Usage
 This package has multi purpose usage. You will get all the facilities of `Laravel Collective` 
-as well as facilities of `sujan/laravel-form-builder` package. We developed this package based on real life scenario.
+as well as facilities of `sujan/laraform` package. We developed this package based on real life scenario.
 
 ### Scenario 1
 Say you have to develop a key value store where all of your application settings will reside. 
@@ -64,7 +64,7 @@ Use it inside form tag in your form like
 ### Example 1
 Let's say you have a `users` table and a `usersmeta` table. 
 In `users` table you will save `name`,`email` and in `usersmeta` table you want to save `address`. 
-Your `yaml` and `json` file will be like below. Where `usersmeta` is relation as well as table name.
+Your `yaml` and `json` file will be like below. Where `usermeta` is relation name.
 Our package will parse the form for you.
 
 ### Sample yaml for Example 1

@@ -373,7 +373,7 @@ class LaraForm
      */
     private function getFormattedErrors($errors, $name)
     {
-        $error = $errors->get($name)[0];
+        $error = $errors->first($name);
         return '<span class="text-danger">'. $error .'</span>';
     }
 

@@ -16,7 +16,7 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function boot()
     {
-        $this->publishes([__DIR__.'/yaml.css' => public_path('css/yaml.css')], 'public');
+        $this->publishes([__DIR__ . '/laraform.css' => public_path('css/laraform.css')], 'laraform');
 
     }
     /**
@@ -28,7 +28,7 @@ class ServiceProvider extends LaravelServiceProvider
     {
         $formBuilder = new FormBuilder(app(HtmlBuilder::class), app('url'), app('view'), app('session.store')->token(), app('request'));
 
-        $this->app->bind('laraform', function(Container $app) use ($formBuilder){
+        $this->app->singleton('laraform', function(Container $app) use ($formBuilder){
             return new LaraForm($formBuilder, $app[Parser::class]);
         });
 
