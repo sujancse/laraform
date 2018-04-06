@@ -8,7 +8,7 @@ use Illuminate\Support\HtmlString;
  */
 class LaraForm
 {
-	protected $formBuilder;
+    protected $formBuilder;
     protected $yamlParser;
 
     /**
@@ -78,7 +78,7 @@ class LaraForm
         $builder .= $this->formBuilder->textarea($name, $value = null, $options = ['class' => 'form-control', 'cols' => 50, 'rows' => 5]);
         $builder .= $this->getClosingTag($name); 
 
-        return $builder;   	
+        return $builder;    
     }
 
     /**
@@ -92,7 +92,7 @@ class LaraForm
      */
     public function customCheckbox($name, $field, $builder = null)
     {
-    	$builder .= $this->getOpeningTag($name, $field);
+        $builder .= $this->getOpeningTag($name, $field);
         $builder .= '<label class="checkbox-inline">';
         $builder .= $this->formBuilder->checkbox($name, $value = null);
         $builder .= $field->label;
@@ -118,7 +118,7 @@ class LaraForm
      */
     public function customSelect($name, $field, $builder = null)
     {
-    	$builder .= $this->getOpeningTag($name, $field);
+        $builder .= $this->getOpeningTag($name, $field);
         $builder .= $this->formBuilder->label(isset($field->label) ? $field->label : '');
         $builder .= $this->formBuilder
             ->select($name,
@@ -142,13 +142,17 @@ class LaraForm
      */
     public function customRadio($name, $field, $builder = null)
     {
-    	$builder .= $this->getOpeningTag($name, $field);
+        $builder .= $this->getOpeningTag($name, $field);
         $builder .= $this->formBuilder->label($field->label).'</br>';
+        $builder .= '<div class="field-radiolist">';
         foreach ($field->options as $key => $value) {
+            $builder .= '<div class="custom-radio">';
             $builder .= $this->formBuilder
-                ->radio($name, $value, $checked = null);
-            $builder .= $key.'</br>';
+                ->radio($name, $key, $checked = null);
+            $builder .= $value.'</br>';
+            $builder .= '</div>';
         }
+        $builder .= '</div>';
         $builder .= $this->getClosingTag($name);
 
         return $builder;
@@ -165,11 +169,11 @@ class LaraForm
      */
     public function customCheckboxlist($name, $field, $builder = null)
     {
-    	$builder .= $this->getOpeningTag($name, $field);
+        $builder .= $this->getOpeningTag($name, $field);
         $builder .= $this->formBuilder->label($field->label);
         $builder .= '<div class="field-checkboxlist">';
         foreach ($field->options as $value => $label) {
-            $builder .= '<div class="checkbox custom-checkbox">';
+            $builder .= '<div class="custom-checkbox">';
             $builder .= $this->formBuilder
                 ->checkbox($name, $value, $checked = null);
             $builder .= $label;
