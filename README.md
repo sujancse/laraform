@@ -1,17 +1,19 @@
 # YAML, JSON to html form with validation for laravel
-Developing rapid forms from yaml and json, when large number of input fields will be required as well as frequent addition and deduction of form fields.
+Developing rapid forms from YAML and JSON, when large number of input fields will be 
+required as well as frequent addition and deduction of form fields.
 
 ## Installation
 ```
 composer require "sujan/laraform"
 ```
 
-As `sujan/laraform` package is based on `laravelcollective/html` you have to add your new provider to the providers array of config/app.php:
+As `sujan/laraform` package is based on `laravelcollective/html` you have to add your new 
+provider to the providers array of config/app.php:
 
 ```
 'providers' => [
     // ...
-    Sujan\LaraForm\YamlServiceProvider::class,
+    Sujan\LaraForm\ServiceProvider::class,
     Collective\Html\HtmlServiceProvider::class,
     // ...
 ],
@@ -46,12 +48,12 @@ as well as facilities of `sujan/laraform` package. We developed this package bas
 ### Scenario 1
 Say you have to develop a key value store where all of your application settings will reside. 
 The kick here is to add more and more new keys when needed but no code modification will be needed. 
-Then this is the right package for you. All you have to do is to write a yaml or json file for your form.
+Then this is the right package for you. All you have to do is to write a YAML or JSON file for your form.
 
 ### Scenario 2
 Let's assume the values of your settings will come as a nested object and you have to make a form for 
 the object then this package is a good choice. It will build the form for you within a few minutes all 
-you have to do is write the json or yaml file. 
+you have to do is write the JSON or YAML file based on the JSON object. 
 
 ## How to Use
 
@@ -67,7 +69,7 @@ In `users` table you will save `name`,`email` and in `usersmeta` table you want 
 Your `yaml` and `json` file will be like below. Where `usermeta` is relation name.
 Our package will parse the form for you.
 
-### Sample yaml for Example 1
+### Sample YAML for Example 1
 ```
 fields:
     name:
@@ -79,13 +81,11 @@ fields:
          label: Email
          type: email
          span: right
-         class: email
          
     usermeta[address]:
          label: Address
          span: full
          type: textarea
-         id: address
 ```
 
 ### Sample JSON for Example 1
@@ -100,29 +100,59 @@ fields:
         "email": {
             "label": "Email",
             "type": "email",
-            "span": "right",
-            "class": "email"
+            "span": "right"
         },
         "usermeta": {
             "address": {
                 "label": "Address",
                 "span": "full",
-                "type": "textarea",
-                "id": "address"
+                "type": "textarea"
              }
         }
     }
 }
 ```
 
-### Html form of sample YAML and JSON.
+Here `span` left, right is used to push the input fields to left and right. 
+If you don’t specify span then the span will be full by default.
+
+### Sample create form
+```
+{{ Form::open(['method' => 'POST']) }}
+{{ Form::yaml(/path/to/yaml/file) }}
+{{ Form::submit('Submit', ['class' => 'form-control']) }}
+{{ Form::close() }}
+```
+
+#### Html form of sample YAML and JSON.
 ![Sample form](https://i.imgur.com/tumLaRJ.png)
 
-### Html form of sample YAML and JSON with validation message.
+### Validation rule:
+```
+$this->validate($request,[
+   'name' => 'required',
+   'email' => 'required',
+   'usermeta.address' => 'required'
+],[
+   'usermeta.address.required' => 'The address field is required.'
+]);
+```
+
+#### Html form of sample YAML and JSON with validation message.
 ![Sample form with validation](https://i.imgur.com/hELsU5d.png)
 
-### Example 2
-Our package is mainly developed for making form from json objects. 
+The YAML and JSON files work for both create and edit page, all you have to do is 
+to pass the model instance or JSON object.
+
+#### Sample edit form for the above example.
+```
+{{ Form::model($model, ['method' => 'POST']) }}
+{{ Form::yaml(/path/to/yaml/file) }}
+{{ Form::submit('Submit', ['class' => 'form-control']) }}
+{{ Form::close() }}
+```
+
+Here variable `$model` is model instance or JSON object like below.
 
 ## Sample JSON object
 ```
@@ -134,6 +164,12 @@ Our package is mainly developed for making form from json objects.
     }
 }
 ```
+
+### Sample edit form of the above JSON object
+![Sample edit form](https://cdn-images-1.medium.com/max/1600/1*Y5QlNZFMviXpLc9YRfqHgQ.png)
+
+### Sample edit form with validation message
+![Sample edit form with validation](https://cdn-images-1.medium.com/max/1600/1*2pUnnj199Eh2Rm6BnYUsww.png)
 
 The `yaml` and `json` file for the above object will be `#Sample 1`'s two files.
 
