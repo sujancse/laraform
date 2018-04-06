@@ -63,9 +63,13 @@ Use it inside form tag in your form like
 {{ Form::json("path/to/file.json") }}
 ```
 
+Laraform support input types `text`, `email`, `password`, `number`, `hidden`, `date`, `file`, `textarea`, `checkbox`, `select`,
+`radio`, `checkboxlist`, `section`;
+
 ### Example 1
 Let's say you have a `users` table and a `usersmeta` table. 
-In `users` table you will save `name`,`email` and in `usersmeta` table you want to save `address`. 
+In `users` table you will save `name`,`email`, `password` and in `usersmeta` table you want to save 
+`date_of_birth`, `color`, `gender`, `address`, `favourites`, `profile_pic`. 
 Your `yaml` and `json` file will be like below. Where `usermeta` is relation name.
 Our package will parse the form for you.
 
@@ -73,43 +77,144 @@ Our package will parse the form for you.
 ```
 fields:
     name:
-         label: Full Name
-         type: text
-         span: left
-           
+      label: Name
+      type: text
+      span: left
+      
     email:
-         label: Email
-         type: email
-         span: right
-         
+      label: Email
+      type: email
+      span: right
+      
+    password:
+      label: Password
+      type: password
+      span: left
+      
+    password_confirmation:
+      label: Confirm Password
+      type: password
+      span: right
+      
+    metadata:
+      label: User Meta
+      type: section
+      
+    usermeta[date_of_birth]:
+      label: Date of Birth
+      type: date
+      span: left
+      
+    usermeta[color]:
+      label: Choose Color
+      type: select
+      span: right
+      options:
+        "": Choose Color
+        red: Red
+        green: Green
+        blue: Blue
+        
+    usermeta[gender]:
+      label: Gender
+      type: radio
+      span: left
+      options:
+        male: Male
+        female: Female
+        other: Other
+        
+    usermeta[favourites][]:
+      label: Favourites
+      type: checkboxlist
+      span: right
+      options:
+        cake: Cake
+        apple: Apple
+        mango: Mango
+        
     usermeta[address]:
-         label: Address
-         span: full
-         type: textarea
+      label: Address
+      type: textarea
+      
+    usermeta[profile_pic]:
+      label: Upload profile picture
+      type: file
 ```
 
 ### Sample JSON for Example 1
 ```
 {
-    "fields": {
-        "name": {
-            "label": "Full Name",
-            "type": "text",
-            "span": "left"
-        },
-        "email": {
-            "label": "Email",
-            "type": "email",
-            "span": "right"
-        },
-        "usermeta": {
-            "address": {
-                "label": "Address",
-                "span": "full",
-                "type": "textarea"
-             }
-        }
+  "fields": {
+    "name": {
+      "label": "Name",
+      "type": "text",
+      "span": "left"
+    },
+    "email": {
+      "label": "Email",
+      "type": "email",
+      "span": "right"
+    },
+    "password": {
+      "label": "Password",
+      "type": "password",
+      "span": "left"
+    },
+    "password_confirmation": {
+      "label": "Confirm Password",
+      "type": "password",
+      "span": "right"
+    },
+    "metadata": {
+      "label": "User Meta",
+      "type": "section"
+    },
+    "usermeta[date_of_birth]": {
+        "label": "Date of Birth",
+        "type": "date",
+        "span": "left"
+    },
+    "usermeta[color]": {
+      "label": "Choose Color",
+      "type": "select",
+      "span": "right",
+      "options": {
+        "": "Choose Color",
+        "red": "Red",
+        "green": "Green",
+        "blue": "Blue"
+      }
+    },
+    "usermeta[gender]": {
+      "label": "Gender",
+      "type": "radio",
+      "span": "left",
+      "options": {
+        "male": "Male",
+        "female": "Female",
+        "other": "Other"
+      }
+    },
+    "usermeta[favourites][]": {
+      "label": "Favourites",
+      "type": "checkboxlist",
+      "span": "right",
+      "options": {
+        "cake": "Cake",
+        "apple": "Apple",
+        "mango": "Mango"
+      }
+    },
+    "usermeta[address]": {
+      "label": "Address",
+      "type": "textarea"
+    },
+    "usermeta[profile_pic]": {
+      "label": "Upload profile picture",
+      "type": "file"
     }
+  }
 }
 ```
 
@@ -125,21 +230,32 @@ If you don’t specify span then the span will be full by default.
 ```
 
 #### Html form of sample YAML and JSON.
-![Sample form](https://i.imgur.com/tumLaRJ.png)
+![Sample form](https://i.imgur.com/v1XhZiR.png)
 
-### Validation rule:
+### Form validation rule:
 ```
-$this->validate($request,[
-   'name' => 'required',
-   'email' => 'required',
-   'usermeta.address' => 'required'
+$this->validate($request, [
+    'name' => 'required',
+    'email' => 'required',
+    'password' => 'required|confirmed',
+    'usermeta.gender' => 'required',
+    'usermeta.favourites' => 'required',
+    'usermeta.address' => 'required',
+    'usermeta.date_of_birth' => 'required',
+    'usermeta.color' => 'required',
+    'usermeta.profile_pic' => 'required|mimes:jpg,png',
 ],[
-   'usermeta.address.required' => 'The address field is required.'
+    'usermeta.address.required' => 'The address field is required.',
+    'usermeta.favourites.required' => 'The favourites field is required.',
+    'usermeta.date_of_birth.required' => 'The date of birth field is required.',
+    'usermeta.color.required' => 'The color field is required.',
+    'usermeta.gender.required' => 'The gender field is required.',
+    'usermeta.profile_pic.required' => 'The profile picture field is required.',
 ]);
 ```
 
 #### Html form of sample YAML and JSON with validation message.
-![Sample form with validation](https://i.imgur.com/hELsU5d.png)
+![Sample form with validation](https://i.imgur.com/MTAzolf.png)
 
 The YAML and JSON files work for both create and edit page, all you have to do is 
 to pass the model instance or JSON object.
@@ -157,19 +273,26 @@ Here variable `$model` is model instance or JSON object like below.
 ## Sample JSON object
 ```
 {
-    "name": "Sujan Mahmud",
-    "email": "sujancseruet@gmail.com",
+    "name": "John Doe",
+    "email": "john@example.com",
     "usermeta": {
-        "address": "Bashundhara R/A"
+        "date_of_birth": "2018-04-19",
+        "color": "green",
+        "gender": "male",
+        "favourites": [
+            "cake",
+            "mango"
+        ],
+        "address": "No where"
     }
 }
 ```
 
 ### Sample edit form of the above JSON object
-![Sample edit form](https://cdn-images-1.medium.com/max/1600/1*Y5QlNZFMviXpLc9YRfqHgQ.png)
+![Sample edit form](https://i.imgur.com/SHhcnJh.png)
 
 ### Sample edit form with validation message
-![Sample edit form with validation](https://cdn-images-1.medium.com/max/1600/1*2pUnnj199Eh2Rm6BnYUsww.png)
+![Sample edit form with validation](https://i.imgur.com/YuQ9Lwy.png)
 
 The `yaml` and `json` file for the above object will be `#Sample 1`'s two files.
 
